@@ -1,12 +1,13 @@
-import { existsSync, readFileSync } from "fs";
+import { existsSync, readFileSync } from "fs"
+import path from "path"
 
-export default class PageUtil {
+export class PageUtil {
 
-    public static getPage(name: string): string {
-        if (!existsSync(`src/pages/${name}.html`)) {
-            return readFileSync(`src/pages/notFound.html`, {encoding: "utf-8"})
-        }
-        return readFileSync(`src/pages/${name}.html`, {encoding: "utf-8"})
+    private static  pagesPath: string = `pages`
+
+    public static getPage(page: string) {
+        if (!existsSync(path.join(this.pagesPath, `${page}.html`))) return
+        return readFileSync(path.join(this.pagesPath, `${page}.html`), {encoding: "utf-8"})
     }
 
 }

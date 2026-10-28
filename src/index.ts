@@ -1,21 +1,48 @@
-import { existsSync, mkdir, mkdirSync } from "fs";
-import { Server } from "./server";
-import ConfigUtil from "./util/config";
-import UserData from "./util/user";
-import multer from "multer";
-import path from "path";
-import Deploy from "./api";
-import { Catbox, Litterbox } from "node-catbox";
+import {Db, MongoClient} from "mongodb"
+import APIEndpoint from "./api"
+import Server from "./server"
+import {ConfigUtil, Logger} from "./util/"
+import {AccountData, FileResource} from "./data"
+import Protector from "./util/protect"
 
-const config = ConfigUtil.getConfig()
-export const catbox = new Litterbox()
-export const server = new Server(config)
+export default class Application {
+	public readonly config: ConfigUtil
+	public server!: Server
+	public accountData!: AccountData
+	public fileResource!: FileResource
+	public database!: Db
+	private readonly logger: Logger = new Logger(`APP`)
 
-if (!existsSync("data")) {
-    mkdirSync("data")
-    mkdirSync("data/files")
+	constructor() {
+		this.config = new ConfigUtil()
+	}
+
+	public async start() {
+		this.logger.log(`Starting application...`)
+		await Protector.init()
+		await this.connectDatabase()
+
+		this.server = new Server()
+		APIEndpoint.init(this.server)
+
+		await this.server.listen(this.config)
+	}
+
+	private async connectDatabase() {
+		const client = new MongoClient(this.config.databaseUrl)
+		await client.connect()
+		this.database = client.db(`Starlight`)
+		this.accountData = new AccountData(this.database.collection(`userdata`))
+		await FileResource.init()
+		this.logger.log(`Database started`)
+	}
 }
+export const app = new Application()
 
-UserData.init()
-Deploy(server.app)
-
+void (async () => {
+	try {
+		await app.start()
+	} catch (err) {
+		console.error(err)
+	}
+})()

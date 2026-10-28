@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="assets/login.css" />
+		<title>Starlight</title>
+	</head>
+
+	<body>
+		<div class="headers">
+			<h1 id="TEXT_HEADER"></h1>
+			<h2 id="TEXT_DESC"></h2>
+		</div>
+
+		<div class="mainContainer">
+			<h1 id="TEXT_AUTH"></h1>
+
+			<form class="loginForm" onsubmit="login(event)">
+				<label for="username" id="TEXT_USERNAME"></label>
+				<input type="text" id="username" name="username" required />
+
+				<label for="password" id="TEXT_PASSWORD"></label>
+				<input type="password" id="password" name="password" required />
+
+				<button type="submit" id="TEXT_LOGIN"></button>
+				<h2 id="TEXT_LOGIN_ERR" style="visibility: hidden"></h2>
+			</form>
+		</div>
+
+		<a href="/register" id="TEXT_REGISTER"></a>
+	</body>
+
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="assets/language.js"></script>
+	<script src="assets/account.js"></script>
+</html>

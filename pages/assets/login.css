@@ -1,0 +1,70 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: radial-gradient(circle at top, #1f2027, #151620);
+    color: white;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.headers {
+    text-align: center;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: rgba(7, 7, 11, 0.333);
+    border: 0.1rem solid;
+    border-color: rgba(255, 255, 255, 0.315);
+    border-radius: 1rem;
+    min-width: 25vw;
+    min-height: 50vh;
+    padding: 1.5rem;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.loginForm input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 0.4rem;
+}
+
+.loginForm button {
+    padding: 0.7rem;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+#TEXT_REGISTER {
+    align-self: center;
+    width: 25vw;
+    box-sizing: border-box;
+    margin-top: 0.75rem;
+    text-align: right;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#TEXT_REGISTER:hover {
+    text-decoration: underline;
+}
+
+#TEXT_LOGIN_ERR {
+    font-size: 1rem;
+    justify-content: center;
+    align-self: center;
+    visibility: hidden;
+}

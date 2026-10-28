@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="assets/home.css" />
+		<title>Starlight</title>
+	</head>
+
+	<body>
+		<div class="main">
+			<div class="sideBar">
+				<a id="BTN_GITHUB" href="https://github.com/snoo-kitty/starlightFM">
+					<img src="assets/github.png" />
+				</a>
+			</div>
+			<div class="container">
+				<div class="header">
+					<div class="texts">
+						<h1 id="TEXT_WELCOME"></h1>
+						<h2 id="TEXT_INFO"></h2>
+					</div>
+					<div class="file">
+						<label for="upload" id="TEXT_UPLOAD"></label>
+						<input type="file" id="upload" name="upload" required />
+						<button type="button" id="TEXT_UPLOAD_CONFIRM" onclick="upload()"></button>
+					</div>
+				</div>
+				<hr />
+				<div class="mainContent">
+					<div class="files">
+						<div class="fileItem" style="display: none">
+							<img class="fileThumbnail" src="assets/test.png" />
+							<a class="fileName"></a>
+							<h2 class="fileDate"></h2>
+							<h2 class="fileSize"></h2>
+						</div>
+					</div>
+				</div>
+				<h1 id="TEXT_VERSION"></h1>
+			</div>
+		</div>
+	</body>
+
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="assets/language.js"></script>
+	<script src="assets/files.js"></script>
+</html>

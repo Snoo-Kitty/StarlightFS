@@ -1,0 +1,102 @@
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: radial-gradient(circle at top, #1f2027, #151620);
+	color: #e8e8f0;
+	margin: 0;
+	min-height: 100vh;
+	font-family: Arial, sans-serif;
+}
+
+.main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	width: 90%;
+	max-width: 56rem;
+	padding: 2rem 0;
+	box-sizing: border-box;
+}
+
+.filePreview {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	min-height: 25vh;
+	background-color: #1c1c27;
+	border: 1px solid #30303d;
+	border-radius: 0.5rem;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.fileMedia {
+	display: block;
+	max-width: 100%;
+	max-height: 65vh;
+	object-fit: contain;
+	border-radius: 0.5rem;
+}
+
+img.fileMedia {
+	width: auto;
+	height: auto;
+}
+
+video.fileMedia {
+	width: 100%;
+	background-color: #151620;
+}
+
+audio.fileMedia {
+	width: 90%;
+	max-width: 37.5rem;
+	margin: 1rem 0;
+}
+
+.fileDocument {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	min-height: 25vh;
+	font-size: 7.5rem;
+}
+
+.fileName {
+	max-width: 100%;
+	font-size: 1.75rem;
+	font-weight: bold;
+	color: #e8e8f0;
+	text-align: center;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.fileName:hover {
+	color: #bbbbc1;
+}
+
+.fileDate,
+.fileSize {
+	margin: 0;
+	font-size: 1rem;
+	font-weight: normal;
+	color: #aaaabb;
+	text-align: center;
+}
+
+#TEXT_BACK_HOME {
+	margin-top: 2rem;
+	margin-bottom: 1.5rem;
+	color: #e8e8f0;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+#TEXT_BACK_HOME:hover {
+	color: #bbbbc1;
+}

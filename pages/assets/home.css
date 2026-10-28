@@ -1,0 +1,187 @@
+body {
+	display: flex;
+	flex-direction: column;
+	background: radial-gradient(circle at top, #1f2027, #151620);
+	color: #e8e8f0;
+	margin: 0;
+	min-height: 100vh;
+}
+
+.main {
+	display: flex;
+	flex-direction: row;
+}
+
+hr {
+	width: 90vw;
+	margin: 0;
+	padding: 0;
+	align-self: center;
+	border-top: 1px solid #ccc;
+	opacity: 50%;
+	margin-bottom: 1rem;
+}
+
+.sideBar {
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+	height: 100vh;
+	width: 2.5rem;
+	background-color: #1c1c27;
+	border-right: 1px solid #30303d;
+	margin-right: 1rem;
+	box-sizing: border-box;
+}
+
+#BTN_GITHUB {
+	margin-top: auto;
+}
+
+.sideBar img {
+	display: block;
+	width: 90%;
+	justify-self: center;
+	height: auto;
+	filter: invert();
+	margin-top: auto;
+	transition: filter 0.3s ease;
+}
+
+.sideBar a:hover img {
+	filter: invert(0.9);
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	min-width: 0;
+}
+
+.header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0 1.5rem 1rem 0;
+}
+
+.header h1 {
+	margin-bottom: 0;
+}
+
+.file {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	margin-left: auto;
+	gap: 0.5rem;
+}
+
+#upload {
+	direction: rtl;
+}
+
+#TEXT_UPLOAD_CONFIRM {
+	background-color: #151620;
+	color: #e8e8f0;
+	cursor: pointer;
+	border: none;
+}
+
+#TEXT_UPLOAD_CONFIRM:hover {
+	text-decoration: underline;
+}
+
+.mainContent {
+	width: 100%;
+	flex: 1;
+}
+
+.files {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	gap: 1rem;
+	width: 99%;
+	height: 70vh;
+	overflow: scroll;
+	overflow-x: hidden;
+	gap: 1.5rem;
+}
+
+.files::-webkit-scrollbar {
+	display: none;
+}
+
+.fileItem {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+	box-sizing: border-box;
+	background-color: #1f2027;
+	border: 1px solid #30303d;
+	border-radius: 8px;
+	width: 14vw;
+	height: 25vh;
+	font-size: 0.5rem;
+	overflow: hidden;
+}
+
+.fileItem h1,
+.fileItem h2 {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+.fileItem img {
+	display: block;
+	max-width: 100%;
+	max-height: 15vh;
+	object-fit: contain;
+}
+
+#TEXT_VERSION {
+	font-size: 1rem;
+	justify-content: center;
+	align-self: center;
+}
+
+.fileAudio {
+	width: 90%;
+	max-width: 100%;
+	height: 40px;
+	margin: 0.5rem 0;
+}
+
+.fileThumbnail,
+.fileIcon {
+	width: 90%;
+	max-width: 90%;
+	font-size: 5rem;
+	max-height: 15vh;
+	object-fit: contain;
+	flex-shrink: 0;
+	align-self: center;
+	text-align: center;
+}
+
+.fileIcon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2.5rem;
+}
+
+.fileName {
+	font-size: 1rem;
+	color: #e8e8f0;
+	cursor: pointer;
+	border: none;
+}

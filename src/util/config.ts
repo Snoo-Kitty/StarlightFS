@@ -1,36 +1,22 @@
-import * as fs from "fs"
-import { ConfigInterface } from "../types/config"
+import "dotenv/config"
+import { writeFileSync } from "fs"
 
-export default class ConfigUtil {
+export class ConfigUtil {
 
-    public static createConfig(): ConfigInterface {
-        console.log("[+] Creating a new config.json...")
-        const config: ConfigInterface = {
-            host: {
-                ip: "0.0.0.0",
-                port: 80
-            },
-            administratorIPs: []
+    public readonly hostIp: string
+    public readonly hostPort: number
+    public readonly databaseUrl: string
+    public readonly fileSizeLimit: number
+
+    constructor() {
+        // we will assume the .env isnt setup
+        if (!process.env.IP) {
+            writeFileSync('.env', `IP=0.0.0.0\nPORT=80\nDATABASE_URL=mongodb://localhost:27017\nFILE_SIZE_LIMIT=1`, {encoding: 'utf-8'})
         }
-        fs.writeFileSync("config.json", JSON.stringify(config, null, 4))
-        return config
-    }
-
-    public static getConfig(): ConfigInterface {
-        if (!fs.existsSync("config.json")) this.createConfig();
-        return JSON.parse(fs.readFileSync("config.json", { encoding: "utf-8" }))
-    }
-
-    public static updateConfig(fields: Map<keyof ConfigInterface, any>): ConfigInterface {
-        let config = this.getConfig()
-
-        console.log(`[+] Updating config: ${JSON.stringify(fields)}`)
-        for (const [key, value] of fields.entries()) {
-            (config as any)[key] = value
-        }
-
-        fs.writeFileSync("config.json", JSON.stringify(config, null, 4))
-        return config
+        this.hostIp = process.env.IP ?? `0.0.0.0`
+        this.hostPort = process.env.PORT ? Number(process.env.port) : 80
+        this.databaseUrl = process.env.DATABASE_URL ?? `mongodb://localhost:27017`
+        this.fileSizeLimit = process.env.FILE_SIZE_LIMIT ? Number(process.env.FILE_SIZE_LIMIT) : 1
     }
 
 }

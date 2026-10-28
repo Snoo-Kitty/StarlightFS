@@ -1,49 +1,34 @@
-import path from "path"
-import fs from "fs"
-import { Express } from "express"
+import path from "node:path"
+import { Logger } from "../util"
+import { createRequire } from "node:module"
+import { readdirSync } from "node:fs"
+import Server from "../server"
 
-const routesDir = path.resolve(__dirname, "./")
-const files = fs.readdirSync(routesDir, { recursive: true }) as string[]
+export default class APIEndpoint {
 
-export default function Deploy(app: Express) {
-    for (const file of files) {
-        if (!file.endsWith(".ts") && !file.endsWith(".js")) continue
-
-        const moduleFile = require(path.join(routesDir, file))
-        const mod = moduleFile.data
-
-        if (!mod) {
-            console.log(`[!] ${file} is missing data required to load.`)
-            continue
+    private static readonly logger: Logger = new Logger(`API`)
+    public static init(server: Server) {
+        const handlers = path.join(__dirname, "routes")
+        const req = createRequire(__filename)
+        const routes = readdirSync(handlers, { recursive: true, encoding: "utf8" }).filter(s => /\.(ts|js)$/.test(s) && !s.endsWith(".d.ts"))
+        for (const route of routes) {
+            const handler = req(path.join(handlers, route))
+            const rtcl = handler.default
+            if (rtcl) {
+                switch(rtcl.method) {
+                    case "get":
+                        server.server.get(rtcl.route, rtcl.handle)
+                        break
+                    case "post":
+                        server.server.post(rtcl.route, rtcl.handle)
+                        break
+                    default:
+                        this.logger.log(`Unsupported method ${rtcl.method}`)
+                        break
+                }
+                this.logger.log(`Registered ${rtcl.route}`)
+            }
         }
-
-        const route = mod.route
-        const method = mod.method?.toLowerCase() ?? "use"
-        const handler = mod.handler
-        const middleware = mod.middleware
-        const stack = middleware
-            ? Array.isArray(middleware)
-                ? [...middleware, handler]
-                : [middleware, handler]
-            : [handler]
-
-        switch (method) {
-            case "get":
-                app.get(route, ...stack)
-                break
-            case "post":
-                app.post(route, ...stack)
-                break
-            case "patch":
-                app.patch(route, ...stack)
-                break
-            default:
-                app.use(route, ...stack)
-                break
-        }
-
-        console.log(`[+] Loaded route: [${method.toUpperCase()}] ${route}`)
     }
 
-    console.log(`[+] Loaded all api endpoints!`)
 }
